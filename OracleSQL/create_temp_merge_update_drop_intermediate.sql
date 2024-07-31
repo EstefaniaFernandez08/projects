@@ -1,0 +1,37 @@
+-- To create the temporary table
+CREATE GLOBAL TEMPORARY TABLE df_table_to_merge
+(
+    INVOICE_NBR VARCHAR2(10),
+    INVOICE_REF VARCHAR2(100)
+)
+ON COMMIT PRESERVE ROWS;
+
+-- To update TBC Invoice
+BEGIN
+  -- 1. Create a temporary column to hold the updated values
+  EXECUTE IMMEDIATE 'ALTER TABLE DF_TBC_SPEND_FINAL ADD TEMP_INVOICE_NBR VARCHAR2(100)';
+
+  -- 2. Perform the merge operation
+  EXECUTE IMMEDIATE '
+    MERGE INTO DF_TBC_SPEND_FINAL dst
+    USING (
+      SELECT INVOICE_NBR, INVOICE_REF
+      FROM df_table_to_merge
+    ) src
+    ON (dst.INVOICE_NBR = src.INVOICE_NBR)
+    WHEN MATCHED THEN
+      UPDATE SET dst.TEMP_INVOICE_NBR = src.INVOICE_REF';
+
+  -- 3. Update the original column with the updated values
+  EXECUTE IMMEDIATE 'UPDATE DF_TBC_SPEND_FINAL SET INVOICE_NBR = TEMP_INVOICE_NBR';
+
+  -- 4. Remove temporary column
+  EXECUTE IMMEDIATE 'ALTER TABLE DF_TBC_SPEND_FINAL DROP COLUMN TEMP_INVOICE_NBR';
+END;
+/
+
+-- Nullify Invoice Number before May23
+UPDATE DF_TBC_SPEND_FINAL
+SET INVOICE_NBR = NULL
+WHERE INVOICE_PAID_DATE < TO_DATE('01-MAY-21')
+AND INVOICE_NBR IS NOT NULL;

@@ -1,0 +1,37 @@
+-- temporary tables exist within the context of a user session and are automatically dropped at the end of that session.
+-- only specifies the table structure columns and data types, data must be loaded manually.
+
+-- 1. To create the temporary table execute this before uploading the csv files.
+CREATE GLOBAL TEMPORARY TABLE TBC_UPDATE_TABLE
+(
+    FILE_NAME VARCHAR2(4000 BYTE),
+    SOURCE_DATA VARCHAR2(4000 BYTE),
+    ACCOUNT_CDE VARCHAR2(4000 BYTE),
+    INVOICE_DATE DATE,
+    INVOICE_NBR VARCHAR2(4000 BYTE),
+    INVOICE_PAID_DATE DATE,
+    INVOICE_SOURCE VARCHAR2(4000 BYTE),
+    INVOICE_TYPE VARCHAR2(4000 BYTE),
+    PO_NBR VARCHAR2(4000 BYTE),
+    PO_ORDER_DATE DATE,
+    SUPPLIER_NBR VARCHAR2(4000 BYTE),
+    INVOICE_LINE_AMOUNT NUMBER(38,2),
+    INVOICE_LINE_CURRENCY VARCHAR2(4000 BYTE),
+    INVOICE_REFERENCE VARCHAR2(4000 BYTE)
+)
+ON COMMIT PRESERVE ROWS;
+
+-- 2. To insert data in INVOICE REFERENCE only execute it when having performed all pre-steps specified in the email.
+MERGE INTO TBC_SPEND_FINAL FINAL
+USING (
+    SELECT 
+        FILE_NAME, INVOICE_NBR, SUPPLIER_NBR, INVOICE_REFERENCE
+    FROM 
+        TBC_UPDATE_TABLE
+) SOURCE
+ON (FINAL.FILE_NAME = SOURCE.FILE_NAME 
+    AND FINAL.INVOICE_NBR = SOURCE.INVOICE_NBR 
+    AND FINAL.SUPPLIER_NBR = SOURCE.SUPPLIER_NBR)
+WHEN MATCHED THEN 
+    UPDATE SET FINAL.INVOICE_REFERENCE = SOURCE.INVOICE_REFERENCE;
+    

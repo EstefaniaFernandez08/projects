@@ -1,0 +1,26 @@
+
+
+
+-- There can be many supplier numbers for the same supplier normalized.
+
+SELECT 
+    SUPPLIER_NORMALIZED,
+    HOLDING_COMPANY,
+    COUNT(DISTINCT SUPPLIER_NBR) AS NUM_UNIQUE_SUPPLIER_NBR
+FROM 
+    DF_SUB_UPDATE_TABLE
+GROUP BY 
+    SUPPLIER_NORMALIZED,
+    HOLDING_COMPANY
+HAVING 
+    COUNT(DISTINCT SUPPLIER_NBR) > 1
+ORDER BY 
+    NUM_UNIQUE_SUPPLIER_NBR DESC;
+
+
+
+
+    
+
+
+    
