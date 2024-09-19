@@ -1,0 +1,19 @@
+# Ignore virtual environment folders
+.venv/
+venv/
+
+# Ignore macOS system files
+.DS_Store
+
+# Ignore Python cache files
+__pycache__/
+*.py[cod]
+
+# Ignore config and credentials files
+config.ini
+*.log
+
+# Ignore environment and dependency files
+.env
+*.env
+
