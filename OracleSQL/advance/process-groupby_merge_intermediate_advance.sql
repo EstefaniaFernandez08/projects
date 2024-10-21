@@ -1,12 +1,12 @@
 -- Create and drop a copy of the table for testing purposes
-CREATE TABLE DF_HPO_SPEND_FINAL AS
+CREATE TABLE DF_SPEND_FINAL AS
 SELECT * FROM HPO_SPEND_FINAL;
 
-DROP TABLE DF_HPO_SPEND_FINAL;
-DROP TABLE DF_HPO_UPDATE_TABLE;
+DROP TABLE DF_SPEND_FINAL;
+DROP TABLE DF_UPDATE_TABLE;
 
 -- 0. Create the server-side table structure
-CREATE TABLE DF_HPO_UPDATE_TABLE
+CREATE TABLE DF_UPDATE_TABLE
 (
     SUPPLIER_NBR VARCHAR2(2000 BYTE),
     SUPPLIER_ERP VARCHAR2(2000 BYTE),
@@ -25,13 +25,13 @@ CREATE TABLE DF_HPO_UPDATE_TABLE
 
 /* 1.1 Import data into the server-side
 
-        a. Right-click on the created temporary table “DF_HPO_UPDATE_TABLE”  and select "Import Data."
+        a. Right-click on the created temporary table "DF_UPDATE_TABLE"  and select "Import Data."
         b. In the Import Data window, browse and select the downloaded CSV file.
-        c. In the Import Data window, modify the format to “csv” and encoding to “UTF-8”.
-        d. Click “Next” on the Import Method tab.
+        c. In the Import Data window, modify the format to "csv" and encoding to "UTF-8".
+        d. Click "Next" on the Import Method tab.
         e. Click "Next" on the Choose Columns tab.
         f. Click "Next" on the Column Definition tab.
-        g. Click “Finish”.
+        g. Click "Finish".
         h. Wait for the data to load successfully. */
 
 -- Explore historical distinct values before and after the update
@@ -47,7 +47,7 @@ SELECT
     COUNT(DISTINCT SUPPLIER_ZIP_POSTAL_CDE) AS DISTINCT_SUPPLIER_ZIP_POSTAL_CDE,
     COUNT(DISTINCT SUPPLIER_NORMALIZED) AS DISTINCT_SUPPLIER_NORMALIZED,
     COUNT(DISTINCT SUPPLIER_PARENT) AS DISTINCT_SUPPLIER_PARENT
-FROM DF_HPO_SPEND_FINAL;
+FROM DF_SPEND_FINAL;
 
 --Return the count of null values for each column
 SELECT
@@ -61,7 +61,7 @@ SELECT
     COUNT(*) - COUNT(SUPPLIER_ZIP_POSTAL_CDE) AS NULL_COUNT_SUPPLIER_ZIP_POSTAL_CDE,
     COUNT(*) - COUNT(SUPPLIER_NORMALIZED) AS NULL_COUNT_SUPPLIER_NORMALIZED,
     COUNT(*) - COUNT(SUPPLIER_PARENT) AS NULL_COUNT_SUPPLIER_PARENT
-FROM DF_HPO_SPEND_FINAL;
+FROM DF_SPEND_FINAL;
 
 -- Export a simplified version of the oracle table for exploration in PowerQuery
 SELECT 
@@ -82,7 +82,7 @@ SELECT
     FISCAL_YEAR,
     COUNT(SOURCE_DATA) AS ROW_COUNT,
     SUM(SPEND_USD)AS SPEND_USD
-FROM DF_HPO_SPEND_FINAL
+FROM DF_SPEND_FINAL
 GROUP BY 
     SOURCE_DATA,
     SUPPLIER_ERP,
@@ -102,13 +102,13 @@ GROUP BY
     
 -- Test the merge update statement
 -- 1. Fix a historical fragmentation issue before 2024
-MERGE INTO DF_HPO_SPEND_FINAL FINAL
+MERGE INTO DF_SPEND_FINAL FINAL
 USING (
     SELECT
         SIDE.SUPPLIER_NBR,
         SIDE.SUPPLIER_NORMALIZED,
         SIDE.SUPPLIER_PARENT
-    FROM DF_HPO_UPDATE_TABLE SIDE
+    FROM DF_UPDATE_TABLE SIDE
 ) SIDE
 ON (
     FINAL.SUPPLIER_NBR = SIDE.SUPPLIER_NBR
@@ -121,7 +121,7 @@ WHEN MATCHED THEN
 
 
 -- 2. Add in supplier-related data historically in case of blanks
-MERGE INTO DF_HPO_SPEND_FINAL FINAL
+MERGE INTO DF_SPEND_FINAL FINAL
 USING (
     SELECT DISTINCT
         SIDE.SUPPLIER_ADDRESS,
@@ -133,7 +133,7 @@ USING (
         SIDE.SUPPLIER_ZIP_POSTAL_CDE,
         SIDE.SUPPLIER_NORMALIZED,
         SIDE.SUPPLIER_PARENT
-    FROM DF_HPO_UPDATE_TABLE SIDE
+    FROM DF_UPDATE_TABLE SIDE
 ) SIDE
 ON (
     FINAL.SUPPLIER_NBR = SIDE.SUPPLIER_NBR

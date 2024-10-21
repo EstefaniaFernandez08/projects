@@ -17,7 +17,7 @@ GROUP BY
     FISCAL_YEAR,
     FISCAL_QUARTER;
     
---1. Update the fiscal year for the IPC business group
+--1. Update the fiscal year for the IPC
 UPDATE SUB_SUP_DIV
 SET FISCAL_YEAR = CASE 
                       WHEN FISCAL_QUARTER = 'FY23' THEN 'CY_2023'

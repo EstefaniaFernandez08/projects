@@ -13,13 +13,13 @@ CREATE TABLE TBC_UPDATE_TABLE
 
 /* 1.2 Import data into the server-side
 
-        a. Right-click on the created temporary table “DF_TBC_UPDATE_TABLE”  and select "Import Data."
+        a. Right-click on the created temporary table "DF_TBC_UPDATE_TABLE"  and select "Import Data."
         b. In the Import Data window, browse and select the downloaded CSV file.
-        c. In the Import Data window, modify the format to “csv” and encoding to “UTF-8”.
-        d. Click “Next” on the Import Method tab.
+        c. In the Import Data window, modify the format to "csv" and encoding to "UTF-8".
+        d. Click "Next" on the Import Method tab.
         e. Click "Next" on the Choose Columns tab.
         f. Click "Next" on the Column Definition tab.
-        g. Click “Finish”.
+        g. Click "Finish".
         h. Wait for the data to load successfully. */
         
 -- 2. run the merge statement
