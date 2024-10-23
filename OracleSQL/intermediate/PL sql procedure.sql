@@ -1,8 +1,3 @@
-/* SQL script to update the supplier information
-Rows to be updated: 106515
-Elapsed time: < 1 min
-*/
-
 SET DEFINE OFF
 SET SERVEROUTPUT ON;
 
