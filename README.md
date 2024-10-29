@@ -41,13 +41,13 @@ ________________________________________________________________________________
 
 ### Basic HTML Elements Used for Table Creation
 
-1.	<center>: Centers the content horizontally (used for headings).
-2.	<h1>: Defines the main heading (adjust text size as needed, e.g., <h2>, <h3>).
-3.	<div>: Creates a container for organizing and aligning elements.
-4.	<table>: Defines the table structure.
-5.	<tr>: Creates a table row.
-6.	<th>: Defines a table header cell (used for column titles).
-7.	<td>: Defines a standard table cell (used for content rows).
-8.	style="": Inline CSS for custom styling like background color, padding, and text color.
+1.	```<center>```: Centers the content horizontally (used for headings).
+2.	```<h1>```: Defines the main heading (adjust text size as needed, e.g., ```<h2>, <h3>```).
+3.	```<div>```: Creates a container for organizing and aligning elements.
+4.	```<table>```: Defines the table structure.
+5.	```<tr>```: Creates a table row.
+6.	```<th>```: Defines a table header cell (used for column titles).
+7.	```<td>```: Defines a standard table cell (used for content rows).
+8.	```style=""```: Inline CSS for custom styling like background color, padding, and text color.
 
 
