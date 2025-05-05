@@ -35,7 +35,7 @@ ________________________________________________________________________________
 - For **commands**, enclose them in triple backticks (```) to format them as code blocks.
 - Use headings (`#`, `##`, `###`, etc.) to organize the document into sections.
 - Use lists (`-` or `1.`) to structure steps clearly.
-- Consider adding links to further resources or explanations as needed for more detailed sections.
+- Display links by using square brackets to depict the `[text]` and the `(URL)` following in parentheses.
 
 ______________________________________________________________________________________________________
 
