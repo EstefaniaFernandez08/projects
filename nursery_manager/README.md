@@ -10,6 +10,14 @@ What you will find here:
 * Workflow and automation design for collaborative data input.
 * Nursery data visualization and periodical reporting.
 
+Resources for collaborative data collection: In this project, Google Forms are used to gather data points publicly
+<a href= "https://forms.gle/BUSmLtCghLBtz3R8A">1. Species</a>
+<a href= "https://forms.gle/x77tCGwhNUuKuWNe9">2. Germination</a>
+<a href= "https://forms.gle/NiMpsMggQeb7ZdQr5">3. Irrigation</a>
+<a href= "https://forms.gle/8ngYF79j3GKUE1dR7">4. Weather Tracking</a>
+<a href= "https://forms.gle/24g5YPtuRejk2Q3W6">5. Plant Observation</a>
+<a href= "https://forms.gle/ZyWFVNM3RvXuLH5x7">6. Pest Control</a>
+
 ## Next steps (Work in progress!)
 1. Separated refined Jupyter notebooks for data collection.
 2. Automate a Python application for collaborative input data.
