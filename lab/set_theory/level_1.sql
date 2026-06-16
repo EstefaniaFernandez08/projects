@@ -33,7 +33,7 @@ INSERT INTO customer_q2
             (7, 'Microsoft'), (4, 'Louis Vuitton');
 
 -- ----------------------------------------------------------
--- BEFORE RUNNING EACH QUERY: predict the output.
+-- BEFORE RUNNING EACH QUERY PREDICT THE OUTPUT
 -- Write your prediction as a comment above each result.
 -- ----------------------------------------------------------
 
@@ -45,10 +45,6 @@ INSERT INTO customer_q2
 -- I expect seven rows as those are the distinct values across quartes 1 & 2
 
 SELECT customer_id, name FROM customer_q1
-UNION
-SELECT customer_id, name FROM customer_q2
+UNION 
+SELECT customer_id name FROM customer_q2
 ORDER BY customer_id;
-
-
-
-
