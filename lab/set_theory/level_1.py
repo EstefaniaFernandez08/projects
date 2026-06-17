@@ -2,7 +2,7 @@
 SET THEORY IN PYTHON | Level 1
 Topic: set type, union, intersection, difference, filtering
 Mirrors: level_1.sql (same dataset, same questions)
-Run with: python
+Run with: python level_1.py
 ================================================================
 Goal: confirm that Python's set type produces identical 
 results to the SQL queries. Same logic, different syntax.
@@ -47,4 +47,11 @@ print(f"\n [1] UNION - ALL unique customer:")
 for customer_id in sorted(all_customers):
     print(f" {customer_id}: {customer_names[customer_id]}")
 
+# EXERCISE 2: INTERSECTION A ∩ B
+# Business question: Who are the recurring customers
+# Predict: Anthropic & Louis Vuitton
 
+recurring = customer_q1 & customer_q2
+print(f"\n [2] INTERSECT - Returning customers:")
+for customer_id in recurring:
+    print(f"{customer_id}: {customer_names[customer_id]}")
