@@ -55,3 +55,18 @@ SELECT customer_id, name FROM customer_q1
 INTERSECT
 SELECT customer_id, name FROM customer_q2
 ORDER BY customer_id;
+
+-- EXERCISE 3: EXCEPT A - B
+-- Business question: Who purchased in Q1 but NOt in Q2 and inverse
+-- Predict: Expecting three rows for Q1 and two for Q2 
+
+SELECT customer_id, name FROM customer_q1
+EXCEPT
+SELECT customer_id, name FROM customer_q2
+ORDER BY customer_id;
+
+-- and reverse
+SELECT customer_id, name FROM customer_q2
+EXCEPT
+SELECT customer_id, name FROM customer_q1
+ORDER BY customer_id;

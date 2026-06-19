@@ -55,3 +55,17 @@ recurring = customer_q1 & customer_q2
 print(f"\n [2] INTERSECT - Returning customers:")
 for customer_id in recurring:
     print(f"{customer_id}: {customer_names[customer_id]}")
+
+# EXERCISE 3: EXCEPT A - B
+# Business question: Who purchased in Q1 but not in Q2
+
+q1_only = customer_q1 - customer_q2
+q2_only = customer_q2 - customer_q1
+
+print(f"\n [3] EXCEPT - q1 only clients:")
+for customer_id in q1_only:
+    print(f"{customer_id}: {customer_names[customer_id]}")
+
+print(f"\n q2 only:")
+for customer_id in q2_only:
+    print(f"{customer_id}: {customer_names[customer_id]}")
