@@ -70,3 +70,33 @@ SELECT customer_id, name FROM customer_q2
 EXCEPT
 SELECT customer_id, name FROM customer_q1
 ORDER BY customer_id;
+
+-- EXERCISE 4: Counting results (cardinality)
+-- Business question: How large is each group?
+-- Math: |A u B|, |A ∩ B|, |A - B|
+
+SELECT 'All unique customers' AS group_label, COUNT(*) 
+    AS count FROM (SELECT customer_id FROM customer_q1 UNION 
+                    SELECT customer_id FROM customer_q2)
+
+UNION ALL
+
+SELECT 'Returning customers', COUNT(*)
+FROM (SELECT customer_id FROM customer_q1 INTERSECT
+        SELECT customer_id FROM customer_q2)
+
+UNION All
+
+SELECT 'Q1 only (customer churn)', COUNT(*)
+FROM (SELECT customer_id FROM customer_q1 EXCEPT
+        SELECT customer_id FROM customer_q2)
+
+UNION ALL
+
+SELECT 'Q2 only (new customers)', COUNT(*)
+FROM (SELECT customer_id FROM customer_q2 EXCEPT
+        SELECT customer_id FROM customer_q1);
+
+-- Do the numbers add up correctly? workout the arithmetic manually
+-- total_unique = returning + q1-only +q2-only
+-- total_unique = 2 + 3 + 2 = 7 
