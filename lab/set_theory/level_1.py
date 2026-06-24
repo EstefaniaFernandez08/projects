@@ -69,3 +69,18 @@ for customer_id in q1_only:
 print(f"\n q2 only:")
 for customer_id in q2_only:
     print(f"{customer_id}: {customer_names[customer_id]}")
+
+
+# EXERCISE 4: Cardinality (counting results)
+# Same as the COUNT(*) query in SQL
+
+print("\n[4] Group sizes:")
+print(f" All unique customers: {len(all_customers)}")
+print(f" Returning customers: {len(recurring)}")
+print(f" Q1 only: {len(q1_only)}")
+print(f" Q2 only: {len(q2_only)}")
+
+total_check = len(recurring) + len(q1_only) + len(q2_only)
+print(f"\n  Recurring + Q1-only + Q2-only = {total_check}")
+print(f" All unique customers = {len(all_customers)}")
+print(f" Match: {total_check == len(all_customers)}")
