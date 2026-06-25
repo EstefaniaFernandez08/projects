@@ -100,3 +100,18 @@ FROM (SELECT customer_id FROM customer_q2 EXCEPT
 -- Do the numbers add up correctly? workout the arithmetic manually
 -- total_unique = returning + q1-only +q2-only
 -- total_unique = 2 + 3 + 2 = 7 
+
+-- EXERCISE 5: WHERE as a set filter (subset)
+-- A WHERE clause restricts the full table to a subset where the condition applies
+-- This is set-buildert notation: { x ⊂ customer_q1 : customer_id > 2} 
+
+SELECT customer_id, name
+FROM customer_q1 
+WHERE customer_id > 2;
+
+-- --------------------------------------------------------------------------------
+-- CONCEPTUAL QUESTION Only reasoning
+-- If I wanted customer in Q1 *or* Q2 but not both how to express this symmetric difference?
+-- To combine the two exclusive customers of each quearter I can substract the 
+-- Intersection using EXCEPT, then add the two quarters using UNION
+-- A △ B = (A − B) ∪ (B − A)
