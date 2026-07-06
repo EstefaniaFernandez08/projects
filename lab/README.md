@@ -24,12 +24,12 @@ We relate to concepts to understand __*why*__ something works, and __*apply the 
 
 ```
 01_concept_name/
-├── README.md         ← Definitions, references & instructions
-├── level_1_sql.sql   ← SQL exercises (starter level)
-└── level_1_python.py ← Python exercises (mirrors SQL logic)
+├── TEASER.ipynb  ← Definitions, references & instructions
+├── level_1.sql   ← SQL exercises (starter level)
+└── level_1.py    ← Python exercises (mirrors SQL logic)
 ```
 
-*Levels are incremental, A new level means same concept with more complexity, multiple files of the same level can exists.*
+*Levels are incremental. A new level means the same concept with more complexity.*
 
 ---
 
