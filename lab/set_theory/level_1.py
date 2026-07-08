@@ -84,3 +84,12 @@ total_check = len(recurring) + len(q1_only) + len(q2_only)
 print(f"\n  Recurring + Q1-only + Q2-only = {total_check}")
 print(f" All unique customers = {len(all_customers)}")
 print(f" Match: {total_check == len(all_customers)}")
+
+# EXERCISE 5: Filtering - the where clause in Python
+# Equivalent to : SELECT ... WHERE customer_id > 2
+# this is a set comprehension, it builds a new set from a condition
+
+filtered = {cid for cid in customer_q1 if cid > 2}
+print(f"\n[5] Filter - Q1 customer with ID > 2 {sorted(filtered)}")
+
+# in math: { x ⊂ Q1 : x > 2 }
