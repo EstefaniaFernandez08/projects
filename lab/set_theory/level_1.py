@@ -93,3 +93,23 @@ filtered = {cid for cid in customer_q1 if cid > 2}
 print(f"\n[5] Filter - Q1 customer with ID > 2 {sorted(filtered)}")
 
 # in math: { x ⊂ Q1 : x > 2 }
+
+# EXERCISE 6: Connecting IDs back to names
+# In SQL, id and names are in the same table - here we look them up
+# This mirrors a JOIN to match ID to its name
+
+print("\n[6] Returning customers by name:")
+returning_named = {customer_names[cid] for cid in recurring}
+print(f"  {sorted(returning_named)}")
+
+print("\n  Q1-only customers by name:")
+q1_only_named = {customer_names[cid] for cid in q1_only}
+print(f"  {sorted(q1_only_named)}")
+
+
+# ----------------------------------------------------------------------
+# CONCEPTUAL REVIEW
+# Symetric difference: customers in Q1 or Q2 but not both.
+# Python has a direct operator for this: ^
+# Try it below and verify it matches the results.
+# ----------------------------------------------------------------------
