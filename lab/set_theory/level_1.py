@@ -106,10 +106,30 @@ print("\n  Q1-only customers by name:")
 q1_only_named = {customer_names[cid] for cid in q1_only}
 print(f"  {sorted(q1_only_named)}")
 
-
-# ----------------------------------------------------------------------
+# ---------------------------------------------------------------------
 # CONCEPTUAL REVIEW
 # Symetric difference: customers in Q1 or Q2 but not both.
 # Python has a direct operator for this: ^
 # Try it below and verify it matches the results.
 # ----------------------------------------------------------------------
+
+# Return elements in either set, but not in the two
+# Same as FULLER OUTER JOIN 
+symmetric_ids = customer_q1 ^ customer_q2
+print(f" Symmetric difference IDs: {sorted(symmetric_ids)}")
+
+# Display with names
+print(f"\n[7] SYMMETRIC DIFFERENCE - One time customers:")
+for customer_id in sorted(symmetric_ids):
+    print(f" {customer_id}:{customer_names[customer_id]}")
+
+# Alternative way using q1 and q2
+symmetric_alt =  q1_only | q2_only
+
+# Verification
+print(f"\n Verification:")
+print(f"\n Is symmetric with '^' == q1_only | q2_only: {symmetric_ids==symmetric_alt}")
+
+# complete data results
+symmetric_names = {customer_names[cid] for cid in symmetric_ids}
+print(f"\n One time customers by name: {sorted(symmetric_names)}")
